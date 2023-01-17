@@ -1,28 +1,44 @@
-let line = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+let main = document.querySelector(".main");
 let tetrisBoard = [
-  line,
-  line,
-  line,
-  line,
-  line,
-  line,
-  line,
-  line,
-  line,
-  line,
-  line,
-  line,
-  line,
-  line,
-  line,
-  line,
-  line,
-  line,
-  line,
-  line,
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 ];
+//draw
+let draw = () => {
+  let mainInnerHTML = "";
+  for (let y = 0; y < tetrisBoard.length; y++) {
+    for (let x = 0; x < tetrisBoard[y].length; x++) {
+      if (tetrisBoard[y][x] === 1) {
+        mainInnerHTML += '<div class="cell movingCell"></div>';
+      } else {
+        mainInnerHTML += '<div class="cell"></div>';
+      }
+    }
+  }
+  main.innerHTML = mainInnerHTML;
+};
 
-console.log(tetrisBoard);
+
+
+draw();
 
 let j = [
   [0, 1, 0],
