@@ -52,8 +52,13 @@ let moveCellDraw = () => {
 
 draw();
 
-moveCellDraw();
-draw();
+let startGame = () => {
+  moveCellDraw();
+  draw();
+};
+
+startGame()
+
 
 let j = [
   [0, 1, 0],
