@@ -22,6 +22,19 @@ let tetrisBoard = [
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 ];
 
+//////////////////////////////////////////////
+//In future change whith tetrisBoard
+// let x = 10;
+// let y = 20;
+// let tetrisBoard = [];
+// for (let i = 0; i < y; i++) {
+//   tetrisBoard[i] = [];
+//   for (let j = 0; j < x; j++) {
+//     tetrisBoard[i][j] = 0;
+//   }
+// }
+/////////////////////////////////////////////////
+
 let speedGame = 1000;
 
 //draw
@@ -60,7 +73,6 @@ let startGame = () => {
 };
 
 setInterval(startGame, speedGame);
-
 
 let j = [
   [0, 1, 0],
