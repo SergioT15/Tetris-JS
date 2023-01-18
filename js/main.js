@@ -1,8 +1,8 @@
 let main = document.querySelector(".main");
 let tetrisBoard = [
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 1, 1, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -21,6 +21,7 @@ let tetrisBoard = [
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 ];
+
 //draw
 let draw = () => {
   let mainInnerHTML = "";
@@ -36,8 +37,22 @@ let draw = () => {
   main.innerHTML = mainInnerHTML;
 };
 
+// Make moving figure down
+let moveCellDraw = () => {
+  for (let y = tetrisBoard.length - 1; y >= 0; y--) {
+    for (let x = 0; x < tetrisBoard[y].length; x++) {
+      if (tetrisBoard[y][x] === 1) {
+        // console.log(tetrisBoard[y + 1]);
+        tetrisBoard[y + 1][x] = 1;
+        tetrisBoard[y][x] = 0;
+      }
+    }
+  }
+};
 
+draw();
 
+moveCellDraw();
 draw();
 
 let j = [
