@@ -51,7 +51,7 @@ let draw = () => {
   }
   main.innerHTML = mainInnerHTML;
 };
-// Check can figure move down 
+// Check can figure move down
 let canFigureMoveDown = () => {
   for (let y = 0; y < tetrisBoard.length; y++) {
     for (let x = 0; x < tetrisBoard[y].length; x++) {
@@ -78,6 +78,36 @@ let moveCellDraw = () => {
     }
   }
 };
+
+//Move figure left
+function canFigureMoveLeft() {
+  for (let y = 0; y < tetrisBoard.length; y++) {
+    for (let x = 0; x < tetrisBoard[y].length; x++) {
+      if (tetrisBoard[y][x] === 1) {
+        if (x === 0 || tetrisBoard[y][x - 1] === 2) {
+          return false;
+        }
+      }
+    }
+  }
+
+  return true;
+}
+
+function moveFigureLeft() {
+  if (canFigureMoveLeft()) {
+    for (let y = tetrisBoard.length - 1; y >= 0; y--) {
+      for (let x = 0; x < tetrisBoard[y].length; x++) {
+        if (tetrisBoard[y][x] === 1) {
+          tetrisBoard[y][x - 1] = 1;
+          tetrisBoard[y][x] = 0;
+        }
+      }
+    }
+  }
+}
+
+
 
 draw();
 
