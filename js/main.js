@@ -107,7 +107,32 @@ function moveFigureLeft() {
   }
 }
 
+function canFigureMoveRight() {
+  for (let y = 0; y < tetrisBoard.length; y++) {
+    for (let x = 0; x < tetrisBoard[y].length; x++) {
+      if (tetrisBoard[y][x] === 1) {
+        if (x === 9 || tetrisBoard[y][x + 1] === 2) {
+          return false;
+        }
+      }
+    }
+  }
 
+  return true;
+}
+
+function moveFigureRight() {
+  if (canFigureMoveRight()) {
+    for (let y = tetrisBoard.length - 1; y >= 0; y--) {
+      for (let x = 9; x >= 0; x--) {
+        if (tetrisBoard[y][x] === 1) {
+          tetrisBoard[y][x + 1] = 1;
+          tetrisBoard[y][x] = 0;
+        }
+      }
+    }
+  }
+}
 
 draw();
 
