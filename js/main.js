@@ -35,7 +35,7 @@ let tetrisBoard = [
 // }
 /////////////////////////////////////////////////
 
-let speedGame = 1000;
+let speedGame = 300;
 
 //draw
 let draw = () => {
@@ -51,15 +51,29 @@ let draw = () => {
   }
   main.innerHTML = mainInnerHTML;
 };
+// Check can figure move down 
+let canFigureMoveDown = () => {
+  for (let y = 0; y < tetrisBoard.length; y++) {
+    for (let x = 0; x < tetrisBoard[y].length; x++) {
+      if (tetrisBoard[y][x] === 1) {
+        if (y === tetrisBoard.length - 1) {
+          return false;
+        }
+      }
+    }
+  }
+  return true;
+};
 
 // Make moving figure down
 let moveCellDraw = () => {
-  for (let y = tetrisBoard.length - 1; y >= 0; y--) {
-    for (let x = 0; x < tetrisBoard[y].length; x++) {
-      if (tetrisBoard[y][x] === 1) {
-        // console.log(tetrisBoard[y + 1]);
-        tetrisBoard[y + 1][x] = 1;
-        tetrisBoard[y][x] = 0;
+  if (canFigureMoveDown()) {
+    for (let y = tetrisBoard.length - 1; y >= 0; y--) {
+      for (let x = 0; x < tetrisBoard[y].length; x++) {
+        if (tetrisBoard[y][x] === 1) {
+          tetrisBoard[y + 1][x] = 1;
+          tetrisBoard[y][x] = 0;
+        }
       }
     }
   }
