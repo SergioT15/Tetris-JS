@@ -22,6 +22,8 @@ let tetrisBoard = [
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 ];
 
+let speedGame = 1000;
+
 //draw
 let draw = () => {
   let mainInnerHTML = "";
@@ -57,7 +59,7 @@ let startGame = () => {
   draw();
 };
 
-startGame()
+setInterval(startGame, speedGame);
 
 
 let j = [
