@@ -66,7 +66,7 @@ let canFigureMoveDown = () => {
 };
 
 // Make moving figure down
-let moveCellDraw = () => {
+let moveCellDown = () => {
   if (canFigureMoveDown()) {
     for (let y = tetrisBoard.length - 1; y >= 0; y--) {
       for (let x = 0; x < tetrisBoard[y].length; x++) {
@@ -136,8 +136,24 @@ function moveFigureRight() {
 
 draw();
 
+// Пробел		32
+// курсор ←	ArrowLeft	37
+// курсор ↑	ArrowUp	38
+// курсор ↓	ArrowDown	40
+// курсор →	ArrowRight	39
+document.onkeydown = function (e) {
+  if (e.keyCode === 37) {
+    moveFigureLeft();
+  } else if (e.keyCode === 39) {
+    moveFigureRight();
+  } else if (e.keyCode === 40) {
+    moveCellDown();
+  }
+  draw();
+};
+
 let startGame = () => {
-  moveCellDraw();
+  moveCellDown();
   draw();
 };
 
