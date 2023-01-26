@@ -8,9 +8,17 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  color: #ffffff;
+}
+
+.game{
+  padding-top: 10px;
+  margin: auto;
+  font-size: 36px;
 }
 
 .main {
+  margin-top: 10px;
   width: 420px;
   height: 820px;
   border: 10px solid gold;
@@ -32,3 +40,6 @@ body {
   background-color: green;
 }
 
+.bc-orange {
+  background-color: orange;
+}
