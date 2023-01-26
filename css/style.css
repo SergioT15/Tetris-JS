@@ -19,15 +19,15 @@ body {
 
 .main {
   margin-top: 10px;
-  width: 420px;
-  height: 820px;
+  width: 320px;
+  height: 620px;
   border: 10px solid gold;
   font-size: 0;
 }
 
 .cell {
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   border: 1px solid silver;
   display: inline-block;
 }
@@ -42,4 +42,49 @@ body {
 
 .bc-orange {
   background-color: orange;
+}
+
+
+.red{
+  background: red;
+}
+
+.blue{
+  background: blue;
+}
+
+.yellow{
+  background: yellow;
+}
+
+.pink{
+  background: pink;
+}
+
+.green{
+  background: green;
+}
+
+.orange{
+  background: orange;
+}
+
+.purple{
+  background: purple;
+}
+
+.start {
+  width: 70px;
+  height: 40px;
+}
+
+.next-figure{
+  position: absolute;
+  top: 300px;
+  left: 40px;
+  font-size: 0;
+}
+.pause{
+  width: 80px;
+  height: 40px;
 }
