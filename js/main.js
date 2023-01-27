@@ -3,7 +3,8 @@ const scoreTetris = document.getElementById("score");
 const levelTetris = document.getElementById("level");
 const startTetris = document.getElementById("start");
 const pauseTetris = document.getElementById("pause");
-const nextFigureElem = document.getElementById("next-figure");
+const gameOver = document.getElementById("game-over");
+const bestScoreTetris = document.getElementById("best-score");
 
 //In future change whith tetrisBoard
 const x = 10;
@@ -82,6 +83,7 @@ const s = {
 
 const figures = { j, i, o, l, z, t, s };
 
+let bestScore = 0;
 let score = 0;
 let gameTimer;
 let currentLevel = 1;
@@ -106,14 +108,7 @@ let activeFigure = {
   figure: getNewFigure(),
 };
 
-let nextFigure = {
-  x: 4,
-  y: 0,
-  color: "red",
-  figure: getNewFigure(),
-};
-
-// draw2
+// draw
 const draw = () => {
   let mainInnerHTML = "";
   for (let y = 0; y < tetrisBoard.length; y++) {
@@ -132,7 +127,21 @@ const draw = () => {
         mainInnerHTML += `<div class="cell pink" ></div>`;
       } else if (tetrisBoard[y][x] === 7) {
         mainInnerHTML += `<div class="cell green" ></div>`;
-      } else if (tetrisBoard[y][x] === 8) {
+      } else if (tetrisBoard[y][x] === 11) {
+        mainInnerHTML += `<div class="cell red" ></div>`;
+      } else if (tetrisBoard[y][x] === 12) {
+        mainInnerHTML += `<div class="cell blue" ></div>`;
+      } else if (tetrisBoard[y][x] === 13) {
+        mainInnerHTML += `<div class="cell orange" ></div>`;
+      } else if (tetrisBoard[y][x] === 14) {
+        mainInnerHTML += `<div class="cell purple" ></div>`;
+      } else if (tetrisBoard[y][x] === 15) {
+        mainInnerHTML += `<div class="cell yellow" ></div>`;
+      } else if (tetrisBoard[y][x] === 16) {
+        mainInnerHTML += `<div class="cell pink" ></div>`;
+      } else if (tetrisBoard[y][x] === 17) {
+        mainInnerHTML += `<div class="cell green" ></div>`;
+      } else if (tetrisBoard[y][x] === 11) {
         mainInnerHTML += `<div class="cell" style="background:${activeFigure.color}"></div>`;
       } else {
         mainInnerHTML += '<div class="cell"></div>';
@@ -140,34 +149,24 @@ const draw = () => {
     }
   }
   main.innerHTML = mainInnerHTML;
-};
 
-function drawNextFigure() {
-  let nextFigureInnerHTML = "";
-  for (let y = 0; y < nextFigure.figure.length; y++) {
-    for (let x = 0; x < nextFigure.figure[y].length; x++) {
-      if (tetrisBoard[y][x] === 1) {
-        nextFigureInnerHTML += `<div class="cell red" ></div>`;
-      } else if (nextFigure.figure[y][x] === 2) {
-        nextFigureInnerHTML += `<div class="cell blue" ></div>`;
-      } else if (nextFigure.figure[y][x] === 3) {
-        nextFigureInnerHTML += `<div class="cell orange" ></div>`;
-      } else if (nextFigure.figure[y][x] === 4) {
-        nextFigureInnerHTML += `<div class="cell purple" ></div>`;
-      } else if (nextFigure.figure[y][x] === 5) {
-        nextFigureInnerHTML += `<div class="cell yellow" ></div>`;
-      } else if (nextFigure.figure[y][x] === 6) {
-        nextFigureInnerHTML += `<div class="cell pink" ></div>`;
-      } else if (nextFigure.figure[y][x] === 7) {
-        nextFigureInnerHTML += `<div class="cell green" ></div>`;
-      } else {
-        nextFigureInnerHTML += '<div class="cell"></div>';
-      }
+  const checkBestScore = () => {
+    if (localStorage.getItem("best-score") === null) {
+      localStorage.setItem("best-score", score);
+      bestScoreTetris.innerHTML = score;
+    } else {
+      bestScore = parseInt(localStorage.getItem("best-score"));
+      bestScoreTetris.innerHTML = bestScore;
     }
-    nextFigureInnerHTML += "</br>";
+  };
+  checkBestScore();
+
+  if (score > bestScore) {
+    localStorage.setItem("best-score", score);
+    document.getElementById("bestScore").innerHTML = score;
+    bestScoreTetris.innerHTML = score;
   }
-  nextFigureElem.innerHTML = nextFigureInnerHTML;
-}
+};
 
 function removePrevActiveFigure() {
   for (let y = 0; y < tetrisBoard.length; y++) {
@@ -221,7 +220,13 @@ function hasCollisions() {
         activeFigure.figure[y][x] &&
         (tetrisBoard[activeFigure.y + y] === undefined ||
           tetrisBoard[activeFigure.y + y][activeFigure.x + x] === undefined ||
-          tetrisBoard[activeFigure.y + y][activeFigure.x + x] === 8)
+          tetrisBoard[activeFigure.y + y][activeFigure.x + x] === 11 ||
+          tetrisBoard[activeFigure.y + y][activeFigure.x + x] === 12 ||
+          tetrisBoard[activeFigure.y + y][activeFigure.x + x] === 13 ||
+          tetrisBoard[activeFigure.y + y][activeFigure.x + x] === 14 ||
+          tetrisBoard[activeFigure.y + y][activeFigure.x + x] === 15 ||
+          tetrisBoard[activeFigure.y + y][activeFigure.x + x] === 16 ||
+          tetrisBoard[activeFigure.y + y][activeFigure.x + x] === 17)
       ) {
         return true;
       }
@@ -234,7 +239,7 @@ function removeFullLines() {
   let canRemoveFullLine = true;
   for (let y = 0; y < tetrisBoard.length; y++) {
     for (let x = 0; x < tetrisBoard[y].length; x++) {
-      if (tetrisBoard[y][x] !== 8) {
+      if (tetrisBoard[y][x] < 10 ) {
         canRemoveFullLine = false;
         break;
       }
@@ -259,38 +264,25 @@ function getNewFigure() {
   const randomIdFigure = Math.floor(Math.random() * 7);
 
   return figures[possiblFigure[randomIdFigure]].a;
-
-  // const newFig=  figures[possiblFigure[randomIdFigure]].a;
-  // return {
-  //   x:4,
-  //   y:0,
-  //   figure: newFig
-  // }
 }
-
-// function getNewFigureColor() {
-//   const possiblFigure = "jiolszt";
-//   const randomIdFigure = Math.floor(Math.random() * 7);
-//   return figures[possiblFigure[randomIdFigure]].color;
-// }
 
 function fixFigure() {
   for (let y = tetrisBoard.length - 1; y >= 0; y--) {
     for (let x = 0; x < tetrisBoard[y].length; x++) {
       if (tetrisBoard[y][x] === 1) {
-        tetrisBoard[y][x] = 8;
+        tetrisBoard[y][x] = 11;
       } else if (tetrisBoard[y][x] === 2) {
-        tetrisBoard[y][x] = 8;
+        tetrisBoard[y][x] = 12;
       } else if (tetrisBoard[y][x] === 3) {
-        tetrisBoard[y][x] = 8;
+        tetrisBoard[y][x] = 13;
       } else if (tetrisBoard[y][x] === 4) {
-        tetrisBoard[y][x] = 8;
+        tetrisBoard[y][x] = 14;
       } else if (tetrisBoard[y][x] === 5) {
-        tetrisBoard[y][x] = 8;
+        tetrisBoard[y][x] = 15;
       } else if (tetrisBoard[y][x] === 6) {
-        tetrisBoard[y][x] = 8;
+        tetrisBoard[y][x] = 16;
       } else if (tetrisBoard[y][x] === 7) {
-        tetrisBoard[y][x] = 8;
+        tetrisBoard[y][x] = 17;
       }
     }
   }
@@ -309,14 +301,10 @@ function reset() {
       tetrisBoard[i][j] = 0;
     }
   }
-  draw()
+  draw();
+  gameOver.style.display = "block";
 }
 
-// Пробел		32
-// курсор ←	ArrowLeft	37
-// курсор ↑	ArrowUp	38
-// курсор ↓	ArrowDown	40
-// курсор →	ArrowRight	39
 document.onkeydown = function (e) {
   if (!isPaused) {
     if (e.code === "ArrowLeft") {
@@ -334,15 +322,22 @@ document.onkeydown = function (e) {
     } else if (e.code === "ArrowUp") {
       rotateFigure();
     }
-    addActiveFigure();
-    draw();
-    drawNextFigure();
+    if (!isPaused) {
+      addActiveFigure();
+      draw();
+    }
   }
 };
 
 startTetris.addEventListener("click", (e) => {
+  e.target.innerHTML = "Start again";
   isPaused = false;
   gameTimer = setTimeout(startGame, possiblLevels[currentLevel].speed);
+  gameOver.style.display = "none";
+  score = 0;
+  scoreTetris.innerHTML = score;
+  currentLevel = 1;
+  levelTetris.innerHTML = currentLevel;
 });
 
 pauseTetris.addEventListener("click", (e) => {
@@ -368,7 +363,6 @@ function moveFigureDown() {
     activeFigure.y = 0;
     if (hasCollisions()) {
       reset();
-      // alert("Game over!");
     }
   }
 }
@@ -376,14 +370,10 @@ function moveFigureDown() {
 draw();
 
 function startGame() {
+  moveFigureDown();
   if (!isPaused) {
-    moveFigureDown();
     addActiveFigure();
     draw();
-    drawNextFigure();
-      gameTimer =setTimeout(startGame, possiblLevels[currentLevel].speed);
-    }
   }
-
-// setTimeout(startGame, possiblLevels[currentLevel].speed);
-// setInterval(startGame, possiblLevels[currentLevel].speed);
+  gameTimer = setTimeout(startGame, possiblLevels[currentLevel].speed);
+}

@@ -11,7 +11,7 @@ body {
   color: #ffffff;
 }
 
-.game{
+.game {
   padding-top: 10px;
   margin: auto;
   font-size: 36px;
@@ -32,59 +32,51 @@ body {
   display: inline-block;
 }
 
-.movingCell {
-  background-color: blue;
-}
-
-.fixedCell {
-  background-color: green;
-}
-
-.bc-orange {
-  background-color: orange;
-}
-
-
-.red{
+.red {
   background: red;
 }
 
-.blue{
+.blue {
   background: blue;
 }
 
-.yellow{
+.yellow {
   background: yellow;
 }
 
-.pink{
+.pink {
   background: pink;
 }
 
-.green{
+.green {
   background: green;
 }
 
-.orange{
+.orange {
   background: orange;
 }
 
-.purple{
+.purple {
   background: purple;
 }
 
 .start {
-  width: 70px;
+  width: 90px;
   height: 40px;
 }
 
-.next-figure{
-  position: absolute;
-  top: 300px;
-  left: 40px;
-  font-size: 0;
-}
-.pause{
+.pause {
   width: 80px;
   height: 40px;
+}
+
+.game-over {
+  font-size: 100px;
+  color: red;
+  text-align: center;
+  display: none;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
