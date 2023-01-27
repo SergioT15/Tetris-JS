@@ -343,7 +343,7 @@ document.onkeydown = function (e) {
   }
 };
 
-startTetris.addEventListener("click", (e) => {
+function startGames(e) {
   e.target.innerHTML = "Start again";
   isPaused = false;
   gameTimer = setTimeout(startGame, possiblLevels[currentLevel].speed);
@@ -352,7 +352,11 @@ startTetris.addEventListener("click", (e) => {
   scoreTetris.innerHTML = score;
   currentLevel = selectedLevel;
   levelTetris.innerHTML = currentLevel;
-});
+
+  startTetris.removeEventListener("click", startGames);
+}
+
+startTetris.addEventListener("click", startGames);
 
 pauseTetris.addEventListener("click", (e) => {
   if (e.target.innerHTML === "Pause") {
@@ -377,6 +381,7 @@ function moveFigureDown() {
     activeFigure.y = 0;
     if (hasCollisions()) {
       reset();
+      startTetris.addEventListener("click", startGames);
     }
   }
 }
