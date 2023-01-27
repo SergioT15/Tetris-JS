@@ -15,6 +15,7 @@ body {
   padding-top: 10px;
   margin: auto;
   font-size: 36px;
+  
 }
 
 .main {
@@ -62,12 +63,23 @@ body {
 
 .start {
   width: 90px;
-  height: 40px;
+  height: 50px;
 }
 
 .pause {
-  width: 80px;
-  height: 40px;
+  width: 90px;
+  height: 50px;
+}
+
+.choose-level {
+  width: 120px;
+  height: 50px;
+}
+
+.namber-choose-level {
+  color: red;
+
+  font-size: 17px;
 }
 
 .game-over {
@@ -79,4 +91,5 @@ body {
   top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
+  font-weight: 700;
 }

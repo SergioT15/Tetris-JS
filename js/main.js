@@ -5,6 +5,7 @@ const startTetris = document.getElementById("start");
 const pauseTetris = document.getElementById("pause");
 const gameOver = document.getElementById("game-over");
 const bestScoreTetris = document.getElementById("best-score");
+const chooseLevel = document.getElementById("startLevel");
 
 //In future change whith tetrisBoard
 const x = 10;
@@ -82,6 +83,12 @@ const s = {
 };
 
 const figures = { j, i, o, l, z, t, s };
+
+// chooseLevel.addEventListener("click",(e) => {
+//   e.target.innerHTML = "1";
+//   currentLevel = 1;
+//   levelTetris.innerHTML = currentLevel;
+// });
 
 let bestScore = 0;
 let score = 0;
