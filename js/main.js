@@ -84,11 +84,7 @@ const s = {
 
 const figures = { j, i, o, l, z, t, s };
 
-// chooseLevel.addEventListener("click",(e) => {
-//   e.target.innerHTML = "1";
-//   currentLevel = 1;
-//   levelTetris.innerHTML = currentLevel;
-// });
+let selectedLevel = 1;
 
 let bestScore = 0;
 let score = 0;
@@ -97,7 +93,7 @@ let currentLevel = 1;
 let isPaused = true;
 let possiblLevels = {
   1: { scoreForLine: 100, speed: 400, nextLevelScore: 100 },
-  2: { scoreForLine: 150, speed: 350, nextLevelScore: 350 },
+  2: { scoreForLine: 150, speed: 350, nextLevelScore: 300 },
   3: { scoreForLine: 200, speed: 300, nextLevelScore: 400 },
   4: { scoreForLine: 250, speed: 250, nextLevelScore: 3000 },
   5: { scoreForLine: 300, speed: 200, nextLevelScore: 4000 },
@@ -107,6 +103,17 @@ let possiblLevels = {
   9: { scoreForLine: 500, speed: 50, nextLevelScore: 15000 },
   10: { scoreForLine: 550, speed: 30, nextLevelScore: Infinity },
 };
+
+chooseLevel.addEventListener("click", () => {
+  
+  if (selectedLevel >= 1 && selectedLevel < 10) {
+    selectedLevel++;
+  } else if (selectedLevel === 10) {
+    selectedLevel = 1;
+  }
+  currentLevel = selectedLevel;
+  levelTetris.innerHTML = currentLevel;
+});
 
 let activeFigure = {
   x: 4,
@@ -343,13 +350,13 @@ startTetris.addEventListener("click", (e) => {
   gameOver.style.display = "none";
   score = 0;
   scoreTetris.innerHTML = score;
-  currentLevel = 1;
+  currentLevel = selectedLevel;
   levelTetris.innerHTML = currentLevel;
 });
 
 pauseTetris.addEventListener("click", (e) => {
   if (e.target.innerHTML === "Pause") {
-    e.target.innerHTML = "End Puse";
+    e.target.innerHTML = "End Pause";
     clearTimeout(gameTimer);
   } else {
     e.target.innerHTML = "Pause";
